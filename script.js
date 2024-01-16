@@ -98,24 +98,24 @@ document.addEventListener('DOMContentLoaded', function () {
     function openAboutBlank(url) {
         if (url) {
             const aboutBlankTab = window.open('about:blank', '_blank');
-            const iframe = document.createElement('iframe');
-            iframe.srcdoc = getCrtEffectHTML();
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            aboutBlankTab.document.body.appendChild(iframe);
+            
+            aboutBlankTab.document.body.innerHTML = `
+                <h1>Loading...</h1>
+                <iframe src="${url}" style="width: 100%; height: 100%; border: none;"></iframe>
+            `;
     
-            return `Opening ${url} in an about:blank tab with CRT monitor effect`;
+            // You can add additional styles or scripts if needed
+            const style = aboutBlankTab.document.createElement("link");
+            style.href = "/path/to.css";
+            style.rel = "stylesheet";
+            aboutBlankTab.document.head.appendChild(style);
+    
+            return `Opening ${url} in an about:blank tab`;
         } else {
             return 'Error: Missing URL. Usage: openab <url>';
         }
     }
-    
-    async function getCrtEffectHTML() {
-        // Fetch and return the content of crt-effect.html
-        const response = await fetch('openab.html');
-        const htmlContent = await response.text();
-        return htmlContent;
-    }
+
     
     
 
