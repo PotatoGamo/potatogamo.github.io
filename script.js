@@ -63,14 +63,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
     async function gotoCommand(url) {
-        if (url) {
-            return `Redirecting to ${url}, please wait`;
-            await new Promise(r => setTimeout(r, 2000));
-            window.open(url, '_blank');
-        } else {
-            return 'Error: Missing URL. Usage: goto <url>';
-        }
+    if (url) {
+        outputElement.textContent += `Redirecting to ${url}, please wait\n`;
+        await new Promise(r => setTimeout(r, 2000));
+        window.open(url, '_blank');
+        return '';  // Return an empty string after the redirection
+    } else {
+        return 'Error: Missing URL. Usage: goto <url>';
     }
+}
+
 
 
     function echoCommand(text) {
