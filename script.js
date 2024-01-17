@@ -62,6 +62,15 @@ document.addEventListener('DOMContentLoaded', function () {
             return 'Error: Missing search query. Usage: search "Google search"';
         }
     }
+async function gotoCommand(url) {
+    if (url) {
+        return `Opening ${url} in a new tab`;
+        await new Promise(r => setTimeout(r, 2000));
+        window.open(url, '_blank');
+    } else {
+        return 'Error: Missing URL. Usage: goto <url>';
+    }
+}
 
     function gotoCommand(url) {
         if (url) {
