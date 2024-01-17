@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 return generateHelp();
             case 'openab':
                 return openAboutBlank(args.slice(1).join(' '));
+            case 'ngon run':
+                return ngonRun();
             default:
                 return 'Error: Invalid command. Type "help" for a list of commands.';
         }
@@ -62,17 +64,33 @@ document.addEventListener('DOMContentLoaded', function () {
             return 'Error: Missing search query. Usage: search "Google search"';
         }
     }
-    async function gotoCommand(url) {
+    function gotoCommand(url) {
+        if (url) {
+            window.open(url, '_blank');
+            return `Opening ${url} in a new tab`;
+        } else {
+
+function ngonRun() {
+    var urlObj = new URL(window.location.href);
+    var url = "n-gon-master/index.html";
     if (url) {
-        outputElement.textContent += `Redirecting to ${url}, please wait\n`;
-        await new Promise(r => setTimeout(r, 2000));
-        window.open(url, '_blank');
-        return '';  // Return an empty string after the redirection
-    } else {
-        return 'Error: Missing URL. Usage: goto <url>';
+        var win;
+        if (win) {
+            win.focus();
+        } else {
+            win = window.open();
+            win.document.body.style.margin = '0';
+            win.document.body.style.height = '100vh';
+            var iframe = win.document.createElement('iframe');
+            iframe.style.border = 'none';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.margin = '0';
+            iframe.src = url;
+            win.document.body.appendChild(iframe);
+        }
     }
 }
-
 
 
     function echoCommand(text) {
