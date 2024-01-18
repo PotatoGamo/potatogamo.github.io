@@ -64,42 +64,45 @@ document.addEventListener('DOMContentLoaded', function () {
             return 'Error: Missing search query. Usage: search "Google search"';
         }
     }
+
     function gotoCommand(url) {
         if (url) {
             window.open(url, '_blank');
             return `Opening ${url} in a new tab`;
         } else {
-
-function ngonRun() {
-    var urlObj = new URL(window.location.href);
-    var url = "n-gon-master/index.html";
-    if (url) {
-        var win;
-        if (win) {
-            win.focus();
-        } else {
-            win = window.open();
-            win.document.body.style.margin = '0';
-            win.document.body.style.height = '100vh';
-            var iframe = win.document.createElement('iframe');
-            iframe.style.border = 'none';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.style.margin = '0';
-            iframe.src = url;
-            win.document.body.appendChild(iframe);
+            
         }
     }
-}
 
+    function ngonRun() {
+        var urlObj = new URL(window.location.href);
+        var url = "n-gon-master/index.html";
+        if (url) {
+            var win;
+            if (win) {
+                win.focus();
+            } else {
+                win = window.open();
+                win.document.body.style.margin = '0';
+                win.document.body.style.height = '100vh';
+                var iframe = win.document.createElement('iframe');
+                iframe.style.border = 'none';
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.margin = '0';
+                iframe.src = url;
+                win.document.body.appendChild(iframe);
+            }
+        }
+    }
 
     function echoCommand(text) {
-        return text || 'Error: Missing text. Usage: echo What to echo';
+        return text || 'Error: Missing text. syntax: echo <text>';
     }
 
     function clearCommand() {
         outputElement.textContent = '';
-        return 'Terminal cleared';
+        return '';
     }
 
     function generateHelp() {
@@ -120,25 +123,17 @@ function ngonRun() {
         if (url) {
             const aboutBlankTab = window.open('about:blank', '_blank');
             
-            aboutBlankTab.document.body.innerHTML = `
-                <h1>Loading...</h1>
-                <iframe src="${url}" style="width: 100%; height: 100%; border: none;"></iframe>
-            `;
-    
-            // You can add additional styles or scripts if needed
+            aboutBlankTab.document.body.innerHTML = `<iframe src="${url}" style="width: 100%; height: 100%; border: none;">Loading...</iframe>`
             const style = aboutBlankTab.document.createElement("link");
             style.href = "/path/to.css";
             style.rel = "stylesheet";
             aboutBlankTab.document.head.appendChild(style);
-    
+
             return `Opening ${url} in an about:blank tab`;
         } else {
             return 'Error: Missing URL. Usage: openab <url>';
         }
     }
-
-    
-    
 
     function navigateHistory(direction) {
         if (commandHistory.length === 0) return;
