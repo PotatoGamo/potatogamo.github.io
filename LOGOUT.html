@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,12 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>⚠️⚠️⚠️ !! ALERT! ⚠️⚠️⚠️</title>
   <style>
-    *{
-      cursor: none;
-    }
     body,
     html {
-      cursor: none;
       margin: 0;
       padding: 0;
       height: 100%;
@@ -42,7 +39,6 @@
     }
 
     .alert {
-      cursor: none;
       width: 100%;
       height: 100%;
       color: red;
@@ -84,14 +80,12 @@
 
     html,
     body {
-      cursor: none;
       margin: 0;
       height: 100%;
       overflow: hidden;
     }
 
     .scrolling-text {
-      cursor: none;
       width: 100%;
       height: 100%;
       color: white;
@@ -109,7 +103,6 @@
     }
 
     .scrolling-text p {
-      cursor: none;
       font-family: 'Comic Sans MS', cursive;
       font-size: 2em;
       animation: scroll 10s linear infinite;
@@ -127,7 +120,7 @@
   </style>
 </head>
 
-<body>
+<body onload="openFullscreen()">
   <div class=scrolling-text>
     <p>!! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT
       NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !!
@@ -273,14 +266,27 @@
       TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! </p>
   </div>
   <div class="alert">!! LOG OUT!! </div>
+  <!-- Audio element for siren sound -->
+  <audio autoplay loop>
+    <source src="siren.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
   <script>
-
+    
+    // Toggle class every 50 milliseconds (to make it even more annoying)
     setInterval(function () {
       document.querySelector(".alert").classList.toggle("red");
+      openFullscreen();
     }, 50);
-
-
-
+    function openFullscreen() {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    }
   </script>
 </body>
 
