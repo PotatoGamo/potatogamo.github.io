@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Username API</title>
+    <script>
+        const names = ['Cool', 'Awesome', 'Fantastic', 'Super', 'Mega'];
+        const adjectives = ['Ninja', 'Master', 'Guru', 'Pro', 'Legend'];
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function generateUsername() {
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const randomNumbers = getRandomInt(100000, 999999);
+
+            return `${randomName}${randomAdjective}${randomNumbers}`;
+        }
+
+        function handleRequest(req, res) {
+            const username = generateUsername();
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ username: username }));
+        }
+
+        if (typeof window === 'undefined') {
+            // Running on server-side
+            const http = require('http');
+            const server = http.createServer(handleRequest);
+            const PORT = process.env.PORT || 3000;
+            server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+        } else {
+            // Running on client-side
+            // This script is not intended to run on the client-side.
+            // You can include additional client-side code here if needed.
+            console.error('This script should be executed on the server-side.');
+        }
+    </script>
+</head>
+<body>
+    <!-- This page does not require any visible content. -->
+</body>
+</html>
 
