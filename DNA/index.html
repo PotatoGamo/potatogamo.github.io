@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" href="thumbnail.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Codon Output</title>
+</head>
+
+<body>
+    <textarea id="input" placeholder="Codon"
+    onchange
+    onpropertychange
+    onkeyuponpaste oninput="run()"></textarea>
+    <input name="transcribe"type="checkbox"id="transcribe"></input>
+    <label for="transcribe">Transcribe</label>
+    <div id="codonOutput"></div>
+    <script src="script.js"></script>
+    <hr>
+    <button id="toggleDebug" onclick="toggleDebug()">Toggle Debug</button>
+    <input type="button" id="clear" value="Clear Debug" onclick="clearDebug()"></input>
+
+    <div id="debug"></div>
+
+</body>
+
+</html>
