@@ -1,11 +1,11 @@
 const canvas = elemByID("canvas");
 const ctx = canvas.getContext("2d");
-const fovSlider = elemByID("fov");
+// const fovSlider = elemByID("fov");
 const scaleSlider = elemByID("scale");
 const thetaSlider = elemByID("theta");
 const zOffsetSlider = elemByID("zOffset");
 var scale = scaleSlider.value;
-var fov = fovSlider.value;
+// var fov = fovSlider.value;
 var theta = thetaSlider.value;
 var zOffset = -zOffsetSlider.value;
 var spin = 0;
@@ -20,7 +20,7 @@ function clearCanvas() {
 }
 
 function drawPoint(x, y) {
-  var dotRadius = 3; // Radius of the dot
+  var dotRadius = elemByID("pointSize").value;
   var dotColor = "red"; // Color of the dot
   // Draw the dot
   ctx.beginPath();
@@ -35,7 +35,7 @@ function render(theta) {
     theta = thetaSlider.value;
   }
   scale = scaleSlider.value;
-  fov = fovSlider.value;
+  // fov = fovSlider.value;
   zOffset = -zOffsetSlider.value;
   clearCanvas();
 
@@ -51,7 +51,7 @@ function render(theta) {
     // ctx.fillText(vertex.a, xa, ya);
     // ctx.fillText(vertex.b, xb, yb);
   }
-  
+
   for (let i = 0; i < projectedPoints.length; i++) {
     let point = projectedPoints[i];
     drawPoint(point.x, point.y);
@@ -84,10 +84,14 @@ function threeDToTwoD(points, theta) {
 
 function drawLine(x1, y1, x2, y2) {
   ctx.strokeStyle = "black";
+  ctx.lineWidth = elemByID("lineWidth").value;
+
   ctx.beginPath();
   ctx.moveTo(x1, y1);
   ctx.lineTo(x2, y2);
-  ctx.stroke();
+  if (elemByID("lineWidth").value > 0.01) {
+    ctx.stroke();
+  }
 }
 
 function radians(degrees) {
