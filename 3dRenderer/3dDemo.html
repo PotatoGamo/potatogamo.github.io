@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D to 2D Projection</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <canvas id="canvas" width="800" height="600"></canvas>
+    </div>
+
+    <div>
+        <div>
+            <label for="scale">Scale:</label>
+            <input type="range" name="scale" id="scale" min="1" max="100">
+        </div>
+        <div>
+            <label for="FOV">FOV:</label>
+            <input type="range" name="FOV" id="fov" min="1" max="100">
+        </div>
+        <div>
+            <label for="θ">θ:</label>
+            <input type="range" name="θ" id="theta" min="-3" max="3" value="0" step="0.01" oninput="render(this.value)">
+        </div>
+        <div>
+            <label for="zOffset">zOffset:</label>
+            <input type="range" name="zOffset" id="zOffset" min="0" max="3" value="2" step="0.01">
+        </div>
+        <div>
+            <label for="spinToggle">Spin:</label>
+            <input type="checkbox" name="spin" id="spinToggle">
+            <button onclick="render()">Render</button>
+        </div>
+    </div>
+    <script src="verticies.js"></script>
+    <script src="points.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
