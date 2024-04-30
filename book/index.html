@@ -1,77 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Player</title>
-    <style>
-        body {
-            background-color: #333;
-            color: #ddd;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Audio Player</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Audio Player</title>
+        <style>
+            body {
+                background-color: #333;
+                color: #ddd;
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin: 50px;
+            }
+        </style>
+    </head>
 
-    <audio id="audioPlayer" controls>
-        Your browser does not support the audio element.
-    </audio>
+    <body>
+        <h1>Audio Player</h1>
 
-    <br>
+        <audio id="audioPlayer" controls>
+            Your browser does not support the audio element.
+        </audio>
 
-    <label for="trackSelect">Select Track:</label>
-    <select id="trackSelect" onchange="selectTrack()">
-        <!-- Options will be populated using JavaScript -->
-    </select>
+        <br />
 
-    <script>
-        // Array to store the file names of audio tracks
-        const playlist = Array.from({ length: 13 }, (_, i) => `./${i + 1}.mp3`);
+        <label for="trackSelect">Select Track:</label>
+        <select id="trackSelect" onchange="selectTrack()">
+            <!-- Options will be populated using JavaScript -->
+        </select>
 
-        // Get the audio player element
-        const audioPlayer = document.getElementById('audioPlayer');
+        <script>
+            // Array to store the file names of audio tracks
+            const playlist = Array.from(
+                { length: 13 },
+                (_, i) => `./${i + 1}.mp3`
+            );
 
-        // Populate the dropdown menu with track options
-        const trackSelect = document.getElementById('trackSelect');
-        playlist.forEach((track, index) => {
-            const option = document.createElement('option');
-            option.value = index;
-            option.text = `Track ${index + 1}`;
-            trackSelect.add(option);
-        });
+            // Get the audio player element
+            const audioPlayer = document.getElementById("audioPlayer");
 
-        // Function to play selected track
-        function selectTrack() {
-            const selectedIndex = trackSelect.value;
-            audioPlayer.src = playlist[selectedIndex];
-            audioPlayer.play();
-            
-            // Save the selected track index to local storage
-            localStorage.setItem('selectedTrack', selectedIndex);
-        }
+            // Populate the dropdown menu with track options
+            const trackSelect = document.getElementById("trackSelect");
+            playlist.forEach((track, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                option.text = `Track ${index + 1}`;
+                trackSelect.add(option);
+            });
 
-        // Check if there is a stored track index, otherwise default to chapter one
-        const storedTrackIndex = localStorage.getItem('selectedTrack');
-        if (storedTrackIndex !== null) {
-            trackSelect.value = storedTrackIndex;
-        } else {
-            trackSelect.value = 0; // Default to chapter one
-        }
+            // Function to play selected track
+            function selectTrack() {
+                const selectedIndex = trackSelect.value;
+                audioPlayer.src = playlist[selectedIndex];
+                audioPlayer.play();
 
-        // Initial playback based on stored or default track
-        selectTrack();
+                // Save the selected track index to local storage
+                localStorage.setItem("selectedTrack", selectedIndex);
+            }
 
-        // Event listener for track end to play the next track
-        audioPlayer.addEventListener('ended', () => {
-            const currentIndex = parseInt(trackSelect.value, 10);
-            const nextIndex = (currentIndex + 1) % playlist.length;
-            trackSelect.value = nextIndex;
+            // Check if there is a stored track index, otherwise default to chapter one
+            const storedTrackIndex = localStorage.getItem("selectedTrack");
+            if (storedTrackIndex !== null) {
+                trackSelect.value = storedTrackIndex;
+            }
+
+            const timestamp = localStorage.getItem("timestamp");
+            if (timestamp !== null) {
+                audioPlayer.duration = timestamp;
+            }
+            // Initial playback based on stored or default track
             selectTrack();
-        });
-    </script>
-</body>
+            audioPlayer.ondurationchange(() =>{
+                localStorage.setItem("timestamp", audioPlayer.duration)
+            })
+            // Event listener for track end to play the next track
+            audioPlayer.addEventListener("ended", () => {
+                const currentIndex = parseInt(trackSelect.value, 10);
+                const nextIndex = (currentIndex + 1) % playlist.length;
+                trackSelect.value = nextIndex;
+                selectTrack();
+            });
+        </script>
+    </body>
 </html>
