@@ -7,9 +7,13 @@ const penSizePreview = document.getElementById("pen-size-preview");
 // line width variable
 let lineWidth = getPenSize();
 
-let wipeOnLoad = !true;
+// Set wipeOnLoad to true if the URL parameter is 'true', false otherwise
+let wipeOnLoad = (new URLSearchParams(window.location.search).get('wipe') === 'true');
+
+// Initialize the drawings array
 let drawings = [];
 
+// Load drawings if wipeOnLoad is false
 if (!wipeOnLoad) {
     drawings = loadDrawings();
 }
