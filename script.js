@@ -77,7 +77,13 @@ document.addEventListener('keydown', (event) => {
         save();
     }
     if (event.key === 'h') {
-        alert(scale);
+        alert("Scale: " + scale + "\nPenVal: " + penSizeSlider.value);
+    }
+    if(event.key === 'x'){
+        if(confirm('Are You Sure You Want To Wipe All Cached Settings?')){
+            localStorage.clear();
+            window.location.reload();
+        }
     }
 });
 
