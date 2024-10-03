@@ -196,6 +196,7 @@ function onMouseDown(event) {
     if (event.button == 0) {
         leftMouseDown = true;
         rightMouseDown = false;
+        startLine(event);
     }
     if (event.button == 2) {
         rightMouseDown = true;
@@ -217,16 +218,7 @@ function onMouseMove(event) {
     const prevScaledY = toTrueY(prevCursorY);
 
     if (leftMouseDown) {
-        drawings.push({
-            x0: prevScaledX,
-            y0: prevScaledY,
-            x1: scaledX,
-            y1: scaledY,
-            color: colorPicker.value,
-            width: lineWidth
-        });
-        saveDrawings();
-        drawLine(prevCursorX, prevCursorY, cursorX, cursorY, colorPicker.value, lineWidth);
+        startLine(event);
     } else if (rightMouseDown) {
         offsetX += (cursorX - prevCursorX) / scale;
         offsetY += (cursorY - prevCursorY) / scale;
@@ -240,6 +232,23 @@ function onMouseMove(event) {
 function onMouseUp(event) {
     leftMouseDown = false;
     rightMouseDown = false;
+}
+
+function startLine(event){
+    const scaledX = toTrueX(cursorX);
+    const scaledY = toTrueY(cursorY);
+    const prevScaledX = toTrueX(prevCursorX);
+    const prevScaledY = toTrueY(prevCursorY);
+    drawings.push({
+        x0: prevScaledX,
+        y0: prevScaledY,
+        x1: scaledX,
+        y1: scaledY,
+        color: colorPicker.value,
+        width: lineWidth
+    });
+    saveDrawings();
+    drawLine(prevCursorX, prevCursorY, cursorX, cursorY, colorPicker.value, lineWidth);
 }
 
 const prevTouches = [null, null]; // up to 2 touches
