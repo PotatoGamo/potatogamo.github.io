@@ -254,7 +254,7 @@ function startLine(event){
         width: lineWidth
     });
     saveDrawings();
-    drawLine(prevCursorX, prevCursorY, cursorX, cursorY, colorPicker.value, lineWidth);
+    drawLine(prevCursorX, prevCursorY, cursorX, cursorY, colorPicker.value, lineWidth*scale);
 }
 
 const prevTouches = [null, null]; // up to 2 touches
