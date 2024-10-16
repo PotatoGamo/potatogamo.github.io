@@ -172,7 +172,7 @@ function loadDrawings() {
 
 function loadColorPicker() {
     const storedColor = localStorage.getItem('color-picker');
-    return storedColor || "#000000";
+    return storedColor || "#ff595e";
 }
 
 function loadPenSize() {
