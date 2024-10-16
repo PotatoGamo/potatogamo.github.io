@@ -57,6 +57,7 @@ document.oncontextmenu = function () {
 colorPicker.addEventListener('change', () => {
     saveColorPicker(colorPicker.value);
     colorPicker.style.backgroundColor = colorPicker.value;
+    penSizePreview.style.backgroundColor = colorPicker.value;
 });
 
 penSizeSlider.oninput = updatePenSize;
