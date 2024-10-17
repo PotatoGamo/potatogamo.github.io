@@ -143,3 +143,16 @@ input[type="color" i]::-webkit-color-swatch {
     padding: 0;
     margin: 0;
 }
+
+#wipe {
+    position: absolute;
+    max-height: 24px;
+    top: 0px;
+    /* Adjust as needed */
+    left: calc(100% - 52px);
+    /* Adjust as needed */
+    transform: scale(0.75);
+    /* border: 1px solid #ffffff4a; */
+    padding: 0;
+    margin: 0;
+}
