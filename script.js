@@ -371,7 +371,7 @@ function drawLine(x0, y0, x1, y1, color, width) {
         context.lineJoin = 'round';
         context.stroke();
     } else {
-        alert("missing parameters")
+        // alert("missing parameters")
     }
 }
 
